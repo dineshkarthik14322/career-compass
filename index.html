@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Compass - Your Path to Success</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            background: white;
+            border-radius: 15px;
+            padding: 5px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px 20px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-tab:hover:not(.active) {
+            background: #f8f9ff;
+            transform: translateY(-1px);
+        }
+
+        .content-section {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .hero-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 20px 25px;
+            font-size: 1.1em;
+            border: 3px solid #e1e5f2;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .career-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .career-card {
+            background: linear-gradient(135deg, #f8f9ff, #e8ecff);
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .career-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .career-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .career-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .career-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-question {
+            background: linear-gradient(135deg, #f8f9ff, #e8ecff);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .quiz-question.active {
+            display: block;
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        .quiz-question h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 15px;
+        }
+
+        .quiz-option {
+            padding: 15px 20px;
+            background: white;
+            border: 2px solid #e1e5f2;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .quiz-option.selected {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .resource-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e1e5f2;
+            border-radius: 3px;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding: 20px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .nav-tabs { flex-direction: column; }
+            .nav-tab { margin-bottom: 5px; }
+            .career-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧭 CareerCompass</h1>
+            <p>Navigate Your Future with Confidence</p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('explore')">🔍 Explore Careers</button>
+            <button class="nav-tab" onclick="showSection('assessment')">📝 Career Quiz</button>
+            <button class="nav-tab" onclick="showSection('resources')">📚 Resources</button>
+            <button class="nav-tab" onclick="showSection('roadmap')">🗺 Roadmaps</button>
+        </div>
+
+        <!-- Explore Careers Section -->
+        <div id="explore" class="content-section active">
+            <div class="hero-section">
+                <h2>Discover Your Perfect Career Match</h2>
+                <div class="search-container">
+                    <input type="text" class="search-box" placeholder="Search careers, skills, or industries..." id="careerSearch">
+                    <button class="search-btn" onclick="searchCareers()">Search</button>
+                </div>
+            </div>
+
+            <div class="career-grid" id="careerGrid">
+                <div class="career-card" onclick="showCareerDetails('software')">
+                    <h3>💻 Software Developer</h3>
+                    <p>Create applications, websites, and systems that power our digital world. Work with cutting-edge technologies and solve complex problems.</p>
+                    <div class="career-stats">
+                        <span>💰 ₹6-20 LPA</span>
+                        <span>📈 High Growth</span>
+                        <span>🎓 Bachelor's+</span>
+                    </div>
+                </div>
+
+                <div class="career-card" onclick="showCareerDetails('doctor')">
+                    <h3>🏥 Medical Doctor</h3>
+                    <p>Diagnose and treat patients, save lives, and contribute to public health. Requires extensive education but offers great fulfillment.</p>
+                    <div class="career-stats">
+                        <span>💰 ₹8-40 LPA</span>
+                        <span>📈 Stable Growth</span>
+                        <span>🎓 MBBS+</span>
+                    </div>
+                </div>
+
+                <div class="career-card" onclick="showCareerDetails('business-analyst')">
+                    <h3>📊 Business Analyst</h3>
+                    <p>Bridge the gap between business needs and technology solutions. Analyze processes, identify improvements, and drive business growth.</p>
+                    <div class="career-stats">
+                        <span>💰 ₹4-15 LPA</span>
+                        <span>📈 High Growth</span>
+                        <span>🎓 Bachelor's+</span>
+                    </div>
+                </div>
+
+                <div class="career-card" onclick="showCareerDetails('teacher')">
+                    <h3>👨‍🏫 Educator</h3>
+                    <p>Shape young minds, inspire learning, and make a lasting impact on future generations through education.</p>
+                    <div class="career-stats">
+                        <span>💰 ₹3-8 LPA</span>
+                        <span>📈 Steady Growth</span>
+                        <span>🎓 Bachelor's+</span>
+                    </div>
+                </div>
+
+                <div class="career-card" onclick="showCareerDetails('designer')">
+                    <h3>🎨 UX/UI Designer</h3>
+                    <p>Create beautiful and functional user experiences for digital products. Combine creativity with user psychology.</p>
+                    <div class="career-stats">
+                        <span>💰 ₹3-12 LPA</span>
+                        <span>📈 High Growth</span>
+                        <span>🎓 Portfolio</span>
+                    </div>
+                </div>
+
+                <div class="career-card" onclick="showCareerDetails('engineer')">
+                    <h3>⚙ Engineer</h3>
+                    <p>Design and build infrastructure, machines, and systems that improve our world. Multiple specializations available.</p>
+                    <div class="career-stats">
+                        <span>💰 ₹4-18 LPA</span>
+                        <span>📈 Steady Growth</span>
+                        <span>🎓 B.Tech/BE</span>
+                    </div>
+                </div>
+
+                <div class="career-card" onclick="showCareerDetails('marketing')">
+                    <h3>📱 Digital Marketer</h3>
+                    <p>Promote brands and products through digital channels. Combine creativity with data analysis and strategy.</p>
+                    <div class="career-stats">
+                        <span>💰 ₹3-10 LPA</span>
+                        <span>📈 High Growth</span>
+                        <span>🎓 Bachelor's</span>
+                    </div>
+                </div>
+
+                <div class="career-card" onclick="showCareerDetails('finance')">
+                    <h3>💼 Financial Analyst</h3>
+                    <p>Analyze financial data, create investment strategies, and help businesses make informed financial decisions.</p>
+                    <div class="career-stats">
+                        <span>💰 ₹4-18 LPA</span>
+                        <span>📈 High Growth</span>
+                        <span>🎓 Commerce/MBA</span>
+                    </div>
+                </div>
+
+                <div class="career-card" onclick="showCareerDetails('entrepreneur')">
+                    <h3>🚀 Entrepreneur</h3>
+                    <p>Start and build your own business. Identify market opportunities, develop products, and create value for customers.</p>
+                    <div class="career-stats">
+                        <span>💰 ₹0-∞ LPA</span>
+                        <span>📈 Variable</span>
+                        <span>🎓 Any/Experience</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Career Assessment Section -->
+        <div id="assessment" class="content-section">
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: #667eea; margin-bottom: 30px;">Career Personality Assessment</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 20%"></div>
+                </div>
+                <p style="text-align: center; margin-bottom: 30px;">Question <span id="currentQuestion">1</span> of 5</p>
+
+                <div class="quiz-question active" data-question="1">
+                    <h3>What type of work environment do you prefer?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this, 'collaborative')">🤝 Collaborative team environment</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'independent')">🏠 Independent work from home</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'dynamic')">🏢 Dynamic office with variety</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'outdoor')">🌳 Outdoor or field work</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" data-question="2">
+                    <h3>Which skills do you want to develop most?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this, 'technical')">💻 Technical & Programming</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'creative')">🎨 Creative & Design</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'leadership')">👑 Leadership & Management</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'analytical')">📊 Analysis & Research</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" data-question="3">
+                    <h3>What motivates you most at work?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this, 'impact')">🌍 Making a positive impact</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'growth')">📈 Personal growth & learning</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'stability')">🛡 Job security & stability</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'innovation')">💡 Innovation & creativity</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" data-question="4">
+                    <h3>How do you prefer to solve problems?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this, 'systematic')">🔬 Systematic & methodical approach</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'intuitive')">💭 Intuitive & creative thinking</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'collaborative-solve')">👥 Team brainstorming</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'research')">📚 Research & data analysis</div>
+                    </div>
+                </div>
+
+                <div class="quiz-question" data-question="5">
+                    <h3>What's your ideal work-life balance?</h3>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this, 'flexible')">⏰ Flexible hours, remote work</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'structured')">📅 Structured 9-5 schedule</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'project')">📝 Project-based work</div>
+                        <div class="quiz-option" onclick="selectOption(this, 'travel')">✈ Travel & variety</div>
+                    </div>
+                </div>
+
+                <div class="quiz-nav">
+                    <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn" style="display: none;">Previous</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn">Next Question</button>
+                </div>
+
+                <div id="quizResult" style="display: none; text-align: center; margin-top: 30px;">
+                    <h3 style="color: #667eea; margin-bottom: 20px;">Your Career Personality: <span id="personalityType"></span></h3>
+                    <p id="personalityDescription" style="font-size: 1.1em; line-height: 1.6; margin-bottom: 20px;"></p>
+                    <div id="recommendedCareers"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Section -->
+        <div id="resources" class="content-section">
+            <h2 style="text-align: center; color: #667eea; margin-bottom: 30px;">Career Development Resources</h2>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📚</div>
+                    <h3>Online Courses</h3>
+                    <p>Access free and paid courses from top universities and platforms like Coursera, edX, and Khan Academy.</p>
+                    <button class="btn btn-primary" style="margin-top: 15px;">Explore Courses</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🎓</div>
+                    <h3>Skill Certifications</h3>
+                    <p>Earn industry-recognized certifications in technology, business, healthcare, and other fields.</p>
+                    <button class="btn btn-primary" style="margin-top: 15px;">View Certifications</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">👥</div>
+                    <h3>Networking Events</h3>
+                    <p>Connect with professionals in your field through virtual and in-person networking opportunities.</p>
+                    <button class="btn btn-primary" style="margin-top: 15px;">Find Events</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">💼</div>
+                    <h3>Job Search Tools</h3>
+                    <p>Resume builders, interview prep guides, and job board aggregators to land your dream job.</p>
+                    <button class="btn btn-primary" style="margin-top: 15px;">Get Tools</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🎯</div>
+                    <h3>Mentorship Programs</h3>
+                    <p>Connect with experienced professionals who can guide your career journey and growth.</p>
+                    <button class="btn btn-primary" style="margin-top: 15px;">Find Mentors</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">📊</div>
+                    <h3>Salary Research</h3>
+                    <p>Research compensation ranges for different roles, companies, and locations to negotiate better.</p>
+                    <button class="btn btn-primary" style="margin-top: 15px;">Check Salaries</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Career Roadmaps Section -->
+        <div id="roadmap" class="content-section">
+            <h2 style="text-align: center; color: #667eea; margin-bottom: 30px;">Career Development Roadmaps</h2>
+            <p style="text-align: center; margin-bottom: 40px; font-size: 1.1em;">Step-by-step guides to achieve your career goals</p>
+            
+            <div class="career-grid">
+                <div class="career-card" onclick="showRoadmap('tech')">
+                    <h3>🚀 Technology Career Path</h3>
+                    <p>From beginner to senior developer, data scientist, or tech lead. Learn programming, build projects, and advance your tech career.</p>
+                    <div style="margin-top: 15px; font-weight: 600; color: #667eea;">View 12-Month Roadmap →</div>
+                </div>
+
+                <div class="career-card" onclick="showRoadmap('business')">
+                    <h3>💼 Business & Management</h3>
+                    <p>Develop leadership skills, business acumen, and strategic thinking to become an effective manager or entrepreneur.</p>
+                    <div style="margin-top: 15px; font-weight: 600; color: #667eea;">View 18-Month Roadmap →</div>
+                </div>
+
+                <div class="career-card" onclick="showRoadmap('finance')">
+                    <h3>💰 Finance & Investment</h3>
+                    <p>Master financial analysis, investment strategies, and risk management to excel in banking, fintech, or investment roles.</p>
+                    <div style="margin-top: 15px; font-weight: 600; color: #667eea;">View 15-Month Roadmap →</div>
+                </div>
+
+                <div class="career-card" onclick="showRoadmap('healthcare')">
+                    <h3>🏥 Healthcare Profession</h3>
+                    <p>Navigate the complex path to becoming a healthcare professional, from education requirements to specialization.</p>
+                    <div style="margin-top: 15px; font-weight: 600; color: #667eea;">View Multi-Year Roadmap →</div>
+                </div>
+
+                <div class="career-card" onclick="showRoadmap('creative')">
+                    <h3>🎨 Creative Industries</h3>
+                    <p>Build a portfolio, develop your artistic skills, and establish yourself in design, media, or entertainment.</p>
+                    <div style="margin-top: 15px; font-weight: 600; color: #667eea;">View 9-Month Roadmap →</div>
+                </div>
+
+                <div class="career-card" onclick="showRoadmap('startup')">
+                    <h3>🚀 Startup & Entrepreneurship</h3>
+                    <p>Learn to identify opportunities, build products, raise funding, and scale your business in India's startup ecosystem.</p>
+                    <div style="margin-top: 15px; font-weight: 600; color: #667eea;">View 24-Month Roadmap →</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 CareerCompass - Empowering Your Future | Made with ❤ for students</p>
+    </div>
+
+    <script>
+        let currentQuizQuestion = 1;
+        let quizAnswers = {};
+
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function searchCareers() {
+            const searchTerm = document.getElementById('careerSearch').value.toLowerCase();
+            const careerCards = document.querySelectorAll('.career-card');
+            
+            careerCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.5s ease-out';
+                } else {
+                    card.style.display = searchTerm === '' ? 'block' : 'none';
+                }
+            });
+        }
+
+        function showCareerDetails(career) {
+            const details = {
+                'software': {
+                    title: 'Software Developer',
+                    description: 'Software developers create applications, websites, and systems. They work with various programming languages and technologies to solve real-world problems.',
+                    skills: ['Programming (Python, Java, JavaScript)', 'Problem-solving', 'Logical thinking', 'Teamwork', 'Database management'],
+                    education: 'B.Tech/BE in Computer Science, BCA, or equivalent experience with strong portfolio',
+                    growth: 'Expected to grow 25% by 2030. High demand in India with opportunities in startups and MNCs',
+                    companies: 'TCS, Wipro, Infosys, Google, Microsoft, Amazon, Flipkart, Zomato'
+                },
+                'doctor': {
+                    title: 'Medical Doctor',
+                    description: 'Medical doctors diagnose and treat illnesses, injuries, and other health conditions. They play a crucial role in healthcare delivery.',
+                    skills: ['Medical knowledge', 'Communication', 'Empathy', 'Critical thinking', 'Decision making'],
+                    education: 'MBBS (5.5 years) + MD/MS specialization (3 years) + residency',
+                    growth: 'Always in demand. Growing healthcare sector in India with medical tourism opportunities',
+                    companies: 'AIIMS, Fortis, Apollo, Max Healthcare, Private practice'
+                },
+                'business-analyst': {
+                    title: 'Business Analyst',
+                    description: 'Business analysts bridge the gap between business needs and IT solutions. They analyze processes and recommend improvements for organizational efficiency.',
+                    skills: ['Data analysis', 'Process mapping', 'Communication', 'Excel/SQL', 'Project management'],
+                    education: 'Any Bachelor\'s degree + MBA preferred. Certifications in Business Analysis valuable',
+                    growth: 'High growth expected with digital transformation initiatives across industries',
+                    companies: 'Accenture, Deloitte, IBM, Capgemini, TCS, local consulting firms'
+                },
+                'finance': {
+                    title: 'Financial Analyst',
+                    description: 'Financial analysts evaluate investment opportunities, analyze financial data, and provide recommendations for business decisions and investment strategies.',
+                    skills: ['Financial modeling', 'Excel mastery', 'Market research', 'Risk assessment', 'Communication'],
+                    education: 'B.Com, BBA, Economics + MBA/CFA/FRM certifications preferred',
+                    growth: 'Strong growth with expanding financial services sector and startup ecosystem',
+                    companies: 'Goldman Sachs, JP Morgan, ICICI, HDFC, Zerodha, Paytm, investment firms'
+                },
+                'entrepreneur': {
+                    title: 'Entrepreneur',
+                    description: 'Entrepreneurs identify market opportunities, develop innovative solutions, and build businesses from scratch. They take calculated risks to create value.',
+                    skills: ['Leadership', 'Risk management', 'Innovation', 'Networking', 'Financial planning', 'Sales'],
+                    education: 'No specific requirement, but business education helps. Real-world experience crucial',
+                    growth: 'India has vibrant startup ecosystem with government support (Startup India initiative)',
+                    companies: 'Start your own! Or join early-stage startups, incubators, venture capital firms'
+                },
+                'teacher': {
+                    title: 'Educator/Teacher',
+                    description: 'Teachers educate and inspire students across various subjects and age groups. They play a vital role in shaping future generations.',
+                    skills: ['Subject expertise', 'Communication', 'Patience', 'Creativity', 'Classroom management'],
+                    education: 'Bachelor\'s in subject + B.Ed mandatory for school teaching. M.Ed for higher positions',
+                    growth: 'Steady demand with focus on quality education and online learning platforms',
+                    companies: 'Government schools, private schools, BYJU\'S, Unacademy, Vedantu, international schools'
+                },
+                'designer': {
+                    title: 'UX/UI Designer',
+                    description: 'UX/UI designers create intuitive and visually appealing digital experiences. They focus on user behavior and interface design.',
+                    skills: ['Design thinking', 'Prototyping', 'User research', 'Figma/Adobe XD', 'HTML/CSS basics'],
+                    education: 'Design degree preferred but strong portfolio more important. Online courses available',
+                    growth: 'Very high growth with digital transformation and app development boom',
+                    companies: 'Google, Microsoft, Flipkart, Swiggy, Zomato, design agencies, startups'
+                },
+                'engineer': {
+                    title: 'Engineer',
+                    description: 'Engineers apply scientific and mathematical principles to design, build, and maintain structures, machines, and systems.',
+                    skills: ['Technical knowledge', 'Problem-solving', 'Mathematics', 'CAD software', 'Project management'],
+                    education: 'B.Tech/BE in respective engineering discipline. M.Tech for advanced roles',
+                    growth: 'Steady growth across civil, mechanical, electrical sectors. New opportunities in renewable energy',
+                    companies: 'L&T, Tata Steel, BHEL, Reliance, Bajaj, government PSUs, construction companies'
+                },
+                'marketing': {
+                    title: 'Digital Marketing Specialist',
+                    description: 'Digital marketers promote brands through online channels including social media, search engines, and content platforms.',
+                    skills: ['SEO/SEM', 'Social media marketing', 'Content creation', 'Analytics', 'Campaign management'],
+                    education: 'Any Bachelor\'s degree + digital marketing certifications (Google, Facebook, HubSpot)',
+                    growth: 'Explosive growth with increasing digital adoption and e-commerce expansion',
+                    companies: 'Google, Facebook, Amazon, Flipkart, digital agencies, all companies need digital marketers'
+                }
+            };
+            
+            const info = details[career] || details['software'];
+            alert(🎯 ${info.title}\n\n📝 Description:\n${info.description}\n\n🛠 Key Skills:\n• ${info.skills.join('\n• ')}\n\n🎓 Education:\n${info.education}\n\n📈 Career Outlook:\n${info.growth}\n\n🏢 Top Employers:\n${info.companies});
+        }
+
+        function selectOption(element, value) {
+            // Remove selection from siblings
+            element.parentNode.querySelectorAll('.quiz-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Select current option
+            element.classList.add('selected');
+            
+            // Store answer
+            quizAnswers[currentQuizQuestion] = value;
+        }
+
+        function nextQuestion() {
+            if (!quizAnswers[currentQuizQuestion]) {
+                alert('Please select an answer before continuing.');
+                return;
+            }
+
+            if (currentQuizQuestion < 5) {
+                // Hide current question
+                document.querySelector(.quiz-question[data-question="${currentQuizQuestion}"]).classList.remove('active');
+                
+                // Show next question
+                currentQuizQuestion++;
+                document.querySelector(.quiz-question[data-question="${currentQuizQuestion}"]).classList.add('active');
+                
+                // Update progress
+                document.getElementById('progressFill').style.width = (currentQuizQuestion * 20) + '%';
+                document.getElementById('currentQuestion').textContent = currentQuizQuestion;
+                
+                // Show/hide navigation buttons
+                document.getElementById('prevBtn').style.display = 'inline-block';
+                
+                if (currentQuizQuestion === 5) {
+                    document.getElementById('nextBtn').textContent = 'Get Results';
+                }
+            } else {
+                // Show results
+                showQuizResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuizQuestion > 1) {
+                // Hide current question
+                document.querySelector(.quiz-question[data-question="${currentQuizQuestion}"]).classList.remove('active');
+                
+                // Show previous question
+                currentQuizQuestion--;
+                document.querySelector(.quiz-question[data-question="${currentQuizQuestion}"]).classList.add('active');
+                
+                // Update progress
+                document.getElementById('progressFill').style.width = (currentQuizQuestion * 20) + '%';
+                document.getElementById('currentQuestion').textContent = currentQuizQuestion;
+                
+                // Show/hide navigation buttons
+                if (currentQuizQuestion === 1) {
+                    document.getElementById('prevBtn').style.display = 'none';
+                }
+                
+                document.getElementById('nextBtn').textContent = 'Next Question';
+            }
+        }
+
+        function showQuizResults() {
+            // Hide quiz questions and navigation
+            document.querySelectorAll('.quiz-question').forEach(q => q.style.display = 'none');
+            document.querySelector('.quiz-nav').style.display = 'none';
+            document.querySelector('.progress-bar').style.display = 'none';
+            
+            // Analyze answers (simplified logic)
+            const answers = Object.values(quizAnswers);
+            let personality = 'The Innovator';
+            let description = 'You enjoy creative problem-solving and working with cutting-edge technologies. You thrive in dynamic environments and love turning ideas into reality.';
+            let careers = ['Software Developer', 'UX/UI Designer', 'Product Manager', 'Entrepreneur'];
+            
+            // Simple personality detection based on answers
+            if (answers.includes('technical') && answers.includes('systematic')) {
+                personality = 'The Analyst';
+                description = 'You excel at systematic thinking and technical problem-solving. You prefer structured approaches and data-driven decisions.';
+                careers = ['Data Scientist', 'Software Engineer', 'Research Analyst', 'Systems Administrator'];
+            } else if (answers.includes('creative') && answers.includes('intuitive')) {
+                personality = 'The Creator';
+                description = 'You have a natural artistic flair and innovative mindset. You excel in roles that allow creative expression and original thinking.';
+                careers = ['Graphic Designer', 'Marketing Creative', 'Content Creator', 'Art Director'];
+            } else if (answers.includes('leadership') && answers.includes('collaborative')) {
+                personality = 'The Leader';
+                description = 'You naturally inspire and guide others. You excel in team environments and enjoy building consensus and driving results.';
+                careers = ['Project Manager', 'Team Lead', 'Business Analyst', 'Operations Manager'];
+            } else if (answers.includes('impact') && answers.includes('collaborative-solve')) {
+                personality = 'The Helper';
+                description = 'You are motivated by making a positive difference in others\' lives. You work best in supportive, collaborative environments.';
+                careers = ['Teacher', 'Healthcare Worker', 'Social Worker', 'Non-profit Manager'];
+            }
+            
+            // Display results
+            document.getElementById('personalityType').textContent = personality;
+            document.getElementById('personalityDescription').textContent = description;
+            
+            const careersHtml = careers.map(career => 
+                <div style="display: inline-block; background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 10px 20px; margin: 5px; border-radius: 25px; font-weight: 600;">${career}</div>
+            ).join('');
+            
+            document.getElementById('recommendedCareers').innerHTML = 
+                '<h4 style="color: #667eea; margin-bottom: 15px;">Recommended Careers:</h4>' + careersHtml +
+                '<div style="margin-top: 20px;"><button class="btn btn-primary" onclick="restartQuiz()">Take Quiz Again</button></div>';
+            
+            document.getElementById('quizResult').style.display = 'block';
+        }
+
+        function restartQuiz() {
+            // Reset quiz state
+            currentQuizQuestion = 1;
+            quizAnswers = {};
+            
+            // Show quiz elements
+            document.querySelectorAll('.quiz-question').forEach(q => q.style.display = 'none');
+            document.querySelector(.quiz-question[data-question="1"]).classList.add('active');
+            document.querySelector('.quiz-nav').style.display = 'flex';
+            document.querySelector('.progress-bar').style.display = 'block';
+            
+            // Reset progress
+            document.getElementById('progressFill').style.width = '20%';
+            document.getElementById('currentQuestion').textContent = '1';
+            
+            // Reset buttons
+            document.getElementById('prevBtn').style.display = 'none';
+            document.getElementById('nextBtn').textContent = 'Next Question';
+            
+            // Hide results
+            document.getElementById('quizResult').style.display = 'none';
+            
+            // Clear selections
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+        }
+
+        function showRoadmap(type) {
+            const roadmaps = {
+                'tech': {
+                    title: 'Technology Career Roadmap',
+                    duration: '12 Months',
+                    steps: [
+                        'Month 1-2: Learn programming basics (Python/JavaScript) - ₹5,000-15,000 for courses',
+                        'Month 3-4: Build your first projects and GitHub portfolio - Free',
+                        'Month 5-6: Learn frameworks (React, Django) and advanced concepts - ₹10,000-25,000',
+                        'Month 7-8: Contribute to open source projects and internships - Earn ₹5,000-15,000/month',
+                        'Month 9-10: Apply for full-time roles or freelance - ₹3-8 LPA starting',
+                        'Month 11-12: Network, get certifications, specialize in AI/Cloud - ₹15,000-40,000 investment'
+                    ]
+                },
+                'business': {
+                    title: 'Business & Management Roadmap',
+                    duration: '18 Months',
+                    steps: [
+                        'Month 1-3: Complete business fundamentals course - ₹10,000-30,000',
+                        'Month 4-6: Learn Excel, PowerBI, business analysis tools - ₹8,000-20,000',
+                        'Month 7-9: Gain experience through internships/projects - Earn ₹8,000-25,000/month',
+                        'Month 10-12: Build professional network, join business communities - ₹2,000-5,000/month',
+                        'Month 13-15: Pursue MBA prep or professional certifications - ₹50,000-2,00,000',
+                        'Month 16-18: Apply for management trainee programs - ₹4-12 LPA starting'
+                    ]
+                },
+                'finance': {
+                    title: 'Finance & Investment Career Roadmap',
+                    duration: '15 Months',
+                    steps: [
+                        'Month 1-3: Learn financial fundamentals and Excel modeling - ₹8,000-20,000',
+                        'Month 4-6: Get certified in CFA Level 1 or FRM basics - ₹25,000-40,000',
+                        'Month 7-9: Practice with real market data, build portfolio - ₹5,000-15,000 tools',
+                        'Month 10-12: Internship at banks, fintech, or investment firms - ₹10,000-30,000/month',
+                        'Month 13-15: Network with professionals, apply for analyst roles - ₹4-15 LPA starting'
+                    ]
+                },
+                'healthcare': {
+                    title: 'Healthcare Professional Roadmap',
+                    duration: '4-8 Years',
+                    steps: [
+                        'Year 1-4: Complete MBBS degree - ₹5-50 lakhs total fees',
+                        'Year 2-3: Gain hospital experience through volunteering - Free to ₹5,000/month stipend',
+                        'Year 4: Clear NEET PG for specialization - ₹2,000-10,000 prep costs',
+                        'Year 5-8: Complete MD/MS specialization - ₹10-80 lakhs fees',
+                        'Year 9+: Practice or pursue super-specialization - Earn ₹8-40 LPA',
+                        'Alternative: Paramedical courses (2-4 years) - ₹50,000-5 lakhs, earn ₹2-8 LPA'
+                    ]
+                },
+                'creative': {
+                    title: 'Creative Industries Roadmap',
+                    duration: '9 Months',
+                    steps: [
+                        'Month 1-2: Learn design software (Photoshop, Figma) - ₹8,000-15,000',
+                        'Month 3-4: Build your first portfolio projects - ₹2,000-5,000 resources',
+                        'Month 5-6: Network with creatives, join design communities - ₹1,000-3,000/month',
+                        'Month 7-8: Take freelance projects, build client base - Earn ₹500-5,000/project',
+                        'Month 9: Launch professional portfolio and apply for jobs - ₹3-12 LPA starting'
+                    ]
+                },
+                'startup': {
+                    title: 'Startup & Entrepreneurship Roadmap',
+                    duration: '24 Months',
+                    steps: [
+                        'Month 1-3: Identify market problem and validate idea - ₹5,000-15,000 research',
+                        'Month 4-6: Build MVP (Minimum Viable Product) - ₹25,000-1,00,000',
+                        'Month 7-12: Launch, get first customers, iterate - ₹50,000-2,00,000 operations',
+                        'Month 13-18: Scale operations, hire team, improve product - ₹2-10 lakhs investment',
+                        'Month 19-24: Raise funding or bootstrap growth - Variable (₹10 lakhs to crores)',
+                        'Ongoing: Government schemes: Startup India, MUDRA loans, incubator support'
+                    ]
+                }
+            };
+            
+            const roadmap = roadmaps[type];
+            const stepsHtml = roadmap.steps.map((step, index) => 
+                `<div style="padding: 15px; margin: 10px 0; background: #f8f9ff; border-left: 4px solid #667eea; border-radius: 8px;">
+                    <strong>Step ${index + 1}:</strong> ${step}
+                </div>`
+            ).join('');
+            
+            // Create a better display for roadmap details
+            const roadmapDetails = `
+🎯 ${roadmap.title}
+⏱ Duration: ${roadmap.duration}
+
+📋 Step-by-Step Plan:
+${roadmap.steps.map((step, i) => ${i + 1}. ${step}).join('\n')}
+
+💡 Tip: All costs are approximate and can vary based on location and institution choice. Look for scholarships, free resources, and government schemes to reduce costs.
+            `;
+            
+            alert(roadmapDetails);
+        }
+
+        // Initialize search functionality
+        document.getElementById('careerSearch').addEventListener('input', function() {
+            if (this.value === '') {
+                searchCareers();
+            }
+        });
+
+        // Add some interactive hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scrolling for better UX
+            document.querySelectorAll('.career-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
